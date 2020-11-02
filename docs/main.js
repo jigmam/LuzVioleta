@@ -106,12 +106,12 @@ class ModulePersonDetailComponent {
         this.selectEmployee = { rut: null, name: "", lastname: "", speciality: "" };
     }
     getItems() {
-        this.http.get('http://127.0.0.1:5000/selectPerson').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectPerson').subscribe(data => {
             this.items = data;
         });
     }
     getEmployee() {
-        this.http.get('http://127.0.0.1:5000/selectEmployee').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectEmployee').subscribe(data => {
             this.employee = data;
         });
     }
@@ -124,12 +124,12 @@ class ModulePersonDetailComponent {
     }
     setEmployee() {
         if (this.iscreate) {
-            this.http.post('http://127.0.0.1:5000/updateEmploye', this.selectEmployee).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/updateEmploye', this.selectEmployee).subscribe(data => {
                 this.getEmployee();
             });
         }
         else {
-            this.http.post('http://127.0.0.1:5000/insertEmployee', this.selectEmployee).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/insertEmployee', this.selectEmployee).subscribe(data => {
                 this.getEmployee();
             });
         }
@@ -350,22 +350,22 @@ class ModulePaymentComponent {
         this.newpayment = { method: "", receipt_number: "", amount: 0, date: "", personid: "" };
     }
     getpayall() {
-        this.http.get('http://127.0.0.1:5000/selectPay').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectPay').subscribe(data => {
             this.allpay = data;
         });
     }
     getalldef() {
-        this.http.get('http://127.0.0.1:5000/selectdefaulter').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectdefaulter').subscribe(data => {
             this.alldef = data;
         });
     }
     getPerson() {
-        this.http.get('http://127.0.0.1:5000/selectPerson').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectPerson').subscribe(data => {
             this.person = data;
         });
     }
     setpayment() {
-        this.http.post('http://127.0.0.1:5000/insertpayment', this.newpayment).subscribe(data => {
+        this.http.post('https://luzvioleta.herokuapp.com/insertpayment', this.newpayment).subscribe(data => {
             this.initpayment();
             this.getpayall();
             this.getalldef();
@@ -654,22 +654,22 @@ class TherapyComponent {
         this.persontherapy = { idperson: "", idtherapist: "", date: "", hour: "" };
     }
     getPerson() {
-        this.http.get('http://127.0.0.1:5000/selectPerson').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectPerson').subscribe(data => {
             this.person = data;
         });
     }
     getTherapy() {
-        this.http.get('http://127.0.0.1:5000/selecttherapy').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selecttherapy').subscribe(data => {
             this.therapy = data;
         });
     }
     getRelator() {
-        this.http.get('http://127.0.0.1:5000/selectEmployee').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectEmployee').subscribe(data => {
             this.relator = data;
         });
     }
     setTherapy() {
-        this.http.post('http://127.0.0.1:5000/inserttherapy', this.persontherapy).subscribe(data => {
+        this.http.post('https://luzvioleta.herokuapp.com/inserttherapy', this.persontherapy).subscribe(data => {
             this.inittherapy();
             this.getTherapy();
         });
@@ -826,7 +826,7 @@ class CourseModuleComponent {
         this.getItems();
     }
     getItems() {
-        this.http.get('http://127.0.0.1:5000/selectCourse').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectCourse').subscribe(data => {
             this.items = data;
         });
     }
@@ -879,7 +879,7 @@ class AppComponent {
     }
 }
 AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(); };
-AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 12, vars: 0, consts: [[1, "container"], [1, "navbar", "navbar-light", "bg-light"], ["src", "/assets/luzVioleta.png", "width", "10%", "height", "100%", "alt", "Luz Violeta", "loading", "lazy", 1, "d-inline-block", "align-top"], ["href", "personModule", 1, "nav-link"], ["href", "courseModule", 1, "nav-link"], ["href", "therapyModule", 1, "nav-link"], ["href", "paymentModule", 1, "nav-link"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 12, vars: 0, consts: [[1, "container"], [1, "navbar", "navbar-light", "bg-light"], ["src", "https://jigmam.github.io/LuzVioleta/assets/luzVioleta.png", "width", "10%", "height", "100%", "alt", "Luz Violeta", "loading", "lazy", 1, "d-inline-block", "align-top"], ["href", "personModule", 1, "nav-link"], ["href", "courseModule", 1, "nav-link"], ["href", "therapyModule", 1, "nav-link"], ["href", "paymentModule", 1, "nav-link"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "body", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "nav", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "img", 2);
@@ -1365,7 +1365,7 @@ class ModulePersonCourseComponent {
     getItems() {
         const firstParam = this.route.snapshot.queryParamMap.get('rut');
         if (firstParam) {
-            this.http.post('http://127.0.0.1:5000/detallePerson', { rut: firstParam }).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/detallePerson', { rut: firstParam }).subscribe(data => {
                 this.items = data[0];
             });
         }
@@ -1375,34 +1375,34 @@ class ModulePersonCourseComponent {
     }
     gettherapy() {
         const firstParam = this.route.snapshot.queryParamMap.get('rut');
-        this.http.post('http://127.0.0.1:5000/selecttherapybyID', { ID: firstParam }).subscribe(data => {
+        this.http.post('https://luzvioleta.herokuapp.com/selecttherapybyID', { ID: firstParam }).subscribe(data => {
             this.therapy = data;
         });
     }
     setcourse(course) {
         const firstParam = this.route.snapshot.queryParamMap.get('rut');
-        this.http.post('http://127.0.0.1:5000/inserthistory', { idcourse: course.ID, idperson: firstParam }).subscribe(data => {
+        this.http.post('https://luzvioleta.herokuapp.com/inserthistory', { idcourse: course.ID, idperson: firstParam }).subscribe(data => {
             this.getCourses();
         });
     }
     getcoursesall() {
-        this.http.get('http://127.0.0.1:5000/detallecourseall').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/detallecourseall').subscribe(data => {
             this.incourse = data;
         });
     }
     getCourses() {
         const firstParam = this.route.snapshot.queryParamMap.get('rut');
-        this.http.post('http://127.0.0.1:5000/detallePersoncourse', { rut: firstParam }).subscribe(data => {
+        this.http.post('https://luzvioleta.herokuapp.com/detallePersoncourse', { rut: firstParam }).subscribe(data => {
             this.course = data;
         });
     }
     getRelator() {
-        this.http.get('http://127.0.0.1:5000/selectEmployee').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectEmployee').subscribe(data => {
             this.relator = data;
         });
     }
     setTherapy() {
-        this.http.post('http://127.0.0.1:5000/inserttherapy', this.persontherapy).subscribe(data => {
+        this.http.post('https://luzvioleta.herokuapp.com/inserttherapy', this.persontherapy).subscribe(data => {
             this.inittherapy();
             this.gettherapy();
         });
@@ -1410,12 +1410,12 @@ class ModulePersonCourseComponent {
     changeItem() {
         const firstParam = this.route.snapshot.queryParamMap.get('rut');
         if (firstParam) {
-            this.http.post('http://127.0.0.1:5000/updatePerson', this.items).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/updatePerson', this.items).subscribe(data => {
                 this.getItems();
             });
         }
         else {
-            this.http.post('http://127.0.0.1:5000/insertPerson', this.items).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/insertPerson', this.items).subscribe(data => {
                 console.log(data);
                 if (data) {
                     this.router.navigate(['personModule/courses'], { queryParams: { rut: this.items.rut } });
@@ -1428,7 +1428,7 @@ class ModulePersonCourseComponent {
         this.newpayment = { method: "", receipt_number: "", amount: 0, date: "", personid: firstParam };
     }
     setpayment() {
-        this.http.post('http://127.0.0.1:5000/insertpayment', this.newpayment).subscribe(data => {
+        this.http.post('https://luzvioleta.herokuapp.com/insertpayment', this.newpayment).subscribe(data => {
             this.initpayment();
         });
     }
@@ -1860,7 +1860,7 @@ class ModulecoursedetailComponent {
         console.log(firstParam);
         this.itemhead = { name: '', description: '', type: 'curso' };
         if (firstParam) {
-            this.http.post('http://127.0.0.1:5000/selectCoursedetail', { ID: firstParam }).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/selectCoursedetail', { ID: firstParam }).subscribe(data => {
                 this.itemhead = data[0];
             });
         }
@@ -1869,13 +1869,13 @@ class ModulecoursedetailComponent {
         const firstParam = this.route.snapshot.queryParamMap.get('ID');
         console.log(firstParam);
         if (firstParam) {
-            this.http.post('http://127.0.0.1:5000/detallecourse', { ID: firstParam }).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/detallecourse', { ID: firstParam }).subscribe(data => {
                 this.items = data;
             });
         }
     }
     getRelator() {
-        this.http.get('http://127.0.0.1:5000/selectEmployee').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectEmployee').subscribe(data => {
             this.relator = data;
         });
     }
@@ -1884,12 +1884,12 @@ class ModulecoursedetailComponent {
     }
     saveModal() {
         if (this.changeitems.ID) {
-            this.http.post('http://127.0.0.1:5000/updateperiod', this.changeitems).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/updateperiod', this.changeitems).subscribe(data => {
                 this.getItems();
             });
         }
         else {
-            this.http.post('http://127.0.0.1:5000/insertperiod', this.changeitems).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/insertperiod', this.changeitems).subscribe(data => {
                 this.getItems();
             });
         }
@@ -1902,11 +1902,11 @@ class ModulecoursedetailComponent {
         const firstParam = this.route.snapshot.queryParamMap.get('ID');
         console.log(firstParam);
         if (firstParam) {
-            this.http.post('http://127.0.0.1:5000/updatecourseDescription', this.itemhead).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/updatecourseDescription', this.itemhead).subscribe(data => {
             });
         }
         else {
-            this.http.post('http://127.0.0.1:5000/insertcourseDescription', this.itemhead).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/insertcourseDescription', this.itemhead).subscribe(data => {
                 console.log(data);
                 if (data) {
                     this.router.navigate(['courseModule/coursedetail'], { queryParams: { ID: data[0].ID } });
