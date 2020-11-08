@@ -441,7 +441,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "/* You can add global styles to this file, and also import other style files */\n", "",{"version":3,"sources":["webpack://src/styles.css"],"names":[],"mappings":"AAAA,8EAA8E","sourcesContent":["/* You can add global styles to this file, and also import other style files */\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "nav{\r\n    background-color: #7D0D8C;\r\n}\r\n\r\ntable {\r\n    border-collapse: collapse;\r\n    border-spacing: 0;\r\n    width: 100%;\r\n    border: 1px solid #ddd;\r\n    overflow-x:auto;\r\n  }", "",{"version":3,"sources":["webpack://src/styles.css"],"names":[],"mappings":"AAAA;IACI,yBAAyB;AAC7B;;AAEA;IACI,yBAAyB;IACzB,iBAAiB;IACjB,WAAW;IACX,sBAAsB;IACtB,eAAe;EACjB","sourcesContent":["nav{\r\n    background-color: #7D0D8C;\r\n}\r\n\r\ntable {\r\n    border-collapse: collapse;\r\n    border-spacing: 0;\r\n    width: 100%;\r\n    border: 1px solid #ddd;\r\n    overflow-x:auto;\r\n  }"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
