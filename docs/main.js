@@ -151,13 +151,13 @@ class ModulePersonDetailComponent {
         }
     }
     getItems() {
-        this.http.get('http://luzvioleta.herokuapp.com/selectPerson').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectPerson').subscribe(data => {
             this.items = data;
             this.items2 = data;
         });
     }
     getEmployee() {
-        this.http.get('http://luzvioleta.herokuapp.com/selectEmployee').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectEmployee').subscribe(data => {
             this.employee = data;
             this.employee2 = data;
         });
@@ -173,12 +173,12 @@ class ModulePersonDetailComponent {
         if (this.selectEmployee.rut != "" && this.selectEmployee.name != "" && this.selectEmployee.lastname != "" && this.selectEmployee.speciality != "") {
             this.emptyCamp = false;
             if (this.iscreate) {
-                this.http.post('http://luzvioleta.herokuapp.com/updateEmploye', this.selectEmployee).subscribe(data => {
+                this.http.post('https://luzvioleta.herokuapp.com/updateEmploye', this.selectEmployee).subscribe(data => {
                     this.getEmployee();
                 });
             }
             else {
-                this.http.post('http://luzvioleta.herokuapp.com/insertEmployee', this.selectEmployee).subscribe(data => {
+                this.http.post('https://luzvioleta.herokuapp.com/insertEmployee', this.selectEmployee).subscribe(data => {
                     this.getEmployee();
                 });
             }
@@ -480,19 +480,19 @@ class ModulePaymentComponent {
         this.newpayment = { method: "", receipt_number: "", amount: 0, date: "", personid: "" };
     }
     getpayall() {
-        this.http.get('http://luzvioleta.herokuapp.com/selectPay').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectPay').subscribe(data => {
             this.allpay = data;
             this.allpay2 = data;
         });
     }
     getalldef() {
-        this.http.get('http://luzvioleta.herokuapp.com/selectdefaulter').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectdefaulter').subscribe(data => {
             this.alldef = data;
             this.alldef2 = data;
         });
     }
     getPerson() {
-        this.http.get('http://luzvioleta.herokuapp.com/selectPerson').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectPerson').subscribe(data => {
             this.person = data;
         });
     }
@@ -528,7 +528,7 @@ class ModulePaymentComponent {
     setpayment() {
         if (this.newpayment.method != "" && this.newpayment.receipt_number != "" && this.newpayment.date != "" && this.newpayment.personid != "" && this.newpayment.amount > 0) {
             this.emptyCamp = false;
-            this.http.post('http://luzvioleta.herokuapp.com/insertpayment', this.newpayment).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/insertpayment', this.newpayment).subscribe(data => {
                 this.initpayment();
                 this.getpayall();
                 this.getalldef();
@@ -541,7 +541,7 @@ class ModulePaymentComponent {
     deletepayment(IDpayment) {
         var r = confirm("Desea eliminar?");
         if (r == true) {
-            this.http.post('http://luzvioleta.herokuapp.com/detelepayment', { ID: IDpayment }).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/detelepayment', { ID: IDpayment }).subscribe(data => {
                 this.initpayment();
                 this.getpayall();
                 this.getalldef();
@@ -907,12 +907,12 @@ class TherapyComponent {
         this.persontherapy = { idperson: "", idtherapist: "", date: "", hour: "", description: "", cost: 0 };
     }
     getPerson() {
-        this.http.get('http://luzvioleta.herokuapp.com/selectPerson').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectPerson').subscribe(data => {
             this.person = data;
         });
     }
     getTherapy() {
-        this.http.get('http://luzvioleta.herokuapp.com/selecttherapy').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selecttherapy').subscribe(data => {
             this.therapy = data;
             this.therapy2 = data;
         });
@@ -932,14 +932,14 @@ class TherapyComponent {
         }
     }
     getRelator() {
-        this.http.get('http://luzvioleta.herokuapp.com/selectEmployee').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectEmployee').subscribe(data => {
             this.relator = data;
         });
     }
     setTherapy() {
         if (this.persontherapy.idperson != "" && this.persontherapy.idtherapist != "" && this.persontherapy.hour != "" && this.persontherapy.date != "") {
             this.emptyCamp = false;
-            this.http.post('http://luzvioleta.herokuapp.com/inserttherapy', this.persontherapy).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/inserttherapy', this.persontherapy).subscribe(data => {
                 this.inittherapy();
                 this.getTherapy();
             });
@@ -952,7 +952,7 @@ class TherapyComponent {
     deleteTherapy(IDtherapy) {
         var r = confirm("Desea eliminar?");
         if (r == true) {
-            this.http.post('http://luzvioleta.herokuapp.com/deteletherapy', { ID: IDtherapy }).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/deteletherapy', { ID: IDtherapy }).subscribe(data => {
                 this.inittherapy();
                 this.getTherapy();
             });
@@ -1197,7 +1197,7 @@ class CourseModuleComponent {
         this.getItems();
     }
     getItems() {
-        this.http.get('http://luzvioleta.herokuapp.com/selectCourse').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectCourse').subscribe(data => {
             this.items = data;
             this.items2 = data;
         });
@@ -1820,7 +1820,7 @@ class ModulePersonCourseComponent {
     getItems() {
         const firstParam = this.route.snapshot.queryParamMap.get('rut');
         if (firstParam) {
-            this.http.post('http://luzvioleta.herokuapp.com/detallePerson', { rut: firstParam }).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/detallePerson', { rut: firstParam }).subscribe(data => {
                 this.items = data[0];
             });
         }
@@ -1830,36 +1830,36 @@ class ModulePersonCourseComponent {
     }
     gettherapy() {
         const firstParam = this.route.snapshot.queryParamMap.get('rut');
-        this.http.post('http://luzvioleta.herokuapp.com/selecttherapybyID', { ID: firstParam }).subscribe(data => {
+        this.http.post('https://luzvioleta.herokuapp.com/selecttherapybyID', { ID: firstParam }).subscribe(data => {
             this.therapy = data;
         });
     }
     setcourse(course) {
         const firstParam = this.route.snapshot.queryParamMap.get('rut');
-        this.http.post('http://luzvioleta.herokuapp.com/inserthistory', { idcourse: course.ID, idperson: firstParam }).subscribe(data => {
+        this.http.post('https://luzvioleta.herokuapp.com/inserthistory', { idcourse: course.ID, idperson: firstParam }).subscribe(data => {
             this.getCourses();
         });
     }
     getcoursesall() {
-        this.http.get('http://luzvioleta.herokuapp.com/detallecourseall').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/detallecourseall').subscribe(data => {
             this.incourse = data;
         });
     }
     getCourses() {
         const firstParam = this.route.snapshot.queryParamMap.get('rut');
-        this.http.post('http://luzvioleta.herokuapp.com/detallePersoncourse', { rut: firstParam }).subscribe(data => {
+        this.http.post('https://luzvioleta.herokuapp.com/detallePersoncourse', { rut: firstParam }).subscribe(data => {
             this.course = data;
         });
     }
     getRelator() {
-        this.http.get('http://luzvioleta.herokuapp.com/selectEmployee').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectEmployee').subscribe(data => {
             this.relator = data;
         });
     }
     setTherapy() {
         if (this.persontherapy.idtherapist != "" && this.persontherapy.hour != "" && this.persontherapy.date != "") {
             this.emptyCamp = false;
-            this.http.post('http://luzvioleta.herokuapp.com/inserttherapy', this.persontherapy).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/inserttherapy', this.persontherapy).subscribe(data => {
                 this.inittherapy();
                 this.gettherapy();
             });
@@ -1873,12 +1873,12 @@ class ModulePersonCourseComponent {
         if (this.items.rut != "" && this.items.address != "" && this.items.birth != "" && this.items.lastname != "" && this.items.name) {
             this.emptyCamp = false;
             if (firstParam) {
-                this.http.post('http://luzvioleta.herokuapp.com/updatePerson', this.items).subscribe(data => {
+                this.http.post('https://luzvioleta.herokuapp.com/updatePerson', this.items).subscribe(data => {
                     this.getItems();
                 });
             }
             else {
-                this.http.post('http://luzvioleta.herokuapp.com/insertPerson', this.items).subscribe(data => {
+                this.http.post('https://luzvioleta.herokuapp.com/insertPerson', this.items).subscribe(data => {
                     console.log(data);
                     if (data) {
                         this.router.navigate(['personModule/courses'], { queryParams: { rut: this.items.rut } });
@@ -1897,7 +1897,7 @@ class ModulePersonCourseComponent {
     setpayment() {
         if (this.newpayment.receipt_number != "" && this.newpayment.amount > 0 && this.newpayment.date != "" && this.newpayment.method != "") {
             this.emptyCamp = false;
-            this.http.post('http://luzvioleta.herokuapp.com/insertpayment', this.newpayment).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/insertpayment', this.newpayment).subscribe(data => {
                 this.initpayment();
             });
         }
@@ -1908,7 +1908,7 @@ class ModulePersonCourseComponent {
     deletehistory(IDhistory) {
         var r = confirm("Desea eliminar?");
         if (r == true) {
-            this.http.post('http://luzvioleta.herokuapp.com/deletehistory', { ID: IDhistory }).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/deletehistory', { ID: IDhistory }).subscribe(data => {
                 this.getCourses();
             });
         }
@@ -1916,7 +1916,7 @@ class ModulePersonCourseComponent {
     deleteTherapy(IDtherapy) {
         var r = confirm("Desea eliminar?");
         if (r == true) {
-            this.http.post('http://luzvioleta.herokuapp.com/deteletherapy', { ID: IDtherapy }).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/deteletherapy', { ID: IDtherapy }).subscribe(data => {
                 this.inittherapy();
                 this.gettherapy();
             });
@@ -2523,7 +2523,7 @@ class ModulecoursedetailComponent {
         console.log(firstParam);
         this.itemhead = { name: '', description: '', type: 'curso' };
         if (firstParam) {
-            this.http.post('http://luzvioleta.herokuapp.com/selectCoursedetail', { ID: firstParam }).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/selectCoursedetail', { ID: firstParam }).subscribe(data => {
                 this.itemhead = data[0];
             });
         }
@@ -2532,13 +2532,13 @@ class ModulecoursedetailComponent {
         const firstParam = this.route.snapshot.queryParamMap.get('ID');
         console.log(firstParam);
         if (firstParam) {
-            this.http.post('http://luzvioleta.herokuapp.com/detallecourse', { ID: firstParam }).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/detallecourse', { ID: firstParam }).subscribe(data => {
                 this.items = data;
             });
         }
     }
     getRelator() {
-        this.http.get('http://luzvioleta.herokuapp.com/selectEmployee').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectEmployee').subscribe(data => {
             this.relator = data;
         });
     }
@@ -2549,12 +2549,12 @@ class ModulecoursedetailComponent {
         if (this.changeitems.monthly != null && this.changeitems.inscription != null && this.changeitems.enddate != "" && this.changeitems.initdate != "" && this.changeitems.media != "" && this.changeitems.relator != "") {
             this.emptyCamp = false;
             if (this.changeitems.ID) {
-                this.http.post('http://luzvioleta.herokuapp.com/updateperiod', this.changeitems).subscribe(data => {
+                this.http.post('https://luzvioleta.herokuapp.com/updateperiod', this.changeitems).subscribe(data => {
                     this.getItems();
                 });
             }
             else {
-                this.http.post('http://luzvioleta.herokuapp.com/insertperiod', this.changeitems).subscribe(data => {
+                this.http.post('https://luzvioleta.herokuapp.com/insertperiod', this.changeitems).subscribe(data => {
                     this.getItems();
                 });
             }
@@ -2572,11 +2572,11 @@ class ModulecoursedetailComponent {
         if (this.itemhead.name != "" && this.itemhead.description != "") {
             this.emptyCamp = false;
             if (firstParam) {
-                this.http.post('http://luzvioleta.herokuapp.com/updatecourseDescription', this.itemhead).subscribe(data => {
+                this.http.post('https://luzvioleta.herokuapp.com/updatecourseDescription', this.itemhead).subscribe(data => {
                 });
             }
             else {
-                this.http.post('http://luzvioleta.herokuapp.com/insertcourseDescription', this.itemhead).subscribe(data => {
+                this.http.post('https://luzvioleta.herokuapp.com/insertcourseDescription', this.itemhead).subscribe(data => {
                     console.log(data);
                     if (data) {
                         this.router.navigate(['courseModule/coursedetail'], { queryParams: { ID: data[0].ID } });
@@ -2591,13 +2591,13 @@ class ModulecoursedetailComponent {
     deleteperiod(IDperiod) {
         var r = confirm("Desea eliminar?");
         if (r == true) {
-            this.http.post('http://luzvioleta.herokuapp.com/deleteperiod', { ID: IDperiod }).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/deleteperiod', { ID: IDperiod }).subscribe(data => {
                 this.getItems();
             });
         }
     }
     getAlumn(IDperiod) {
-        this.http.post('http://luzvioleta.herokuapp.com/personbycourse', { ID: IDperiod }).subscribe(data => {
+        this.http.post('https://luzvioleta.herokuapp.com/personbycourse', { ID: IDperiod }).subscribe(data => {
             this.alumn = data;
         });
     }
