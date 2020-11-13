@@ -492,19 +492,19 @@ class ModulePaymentComponent {
         this.newpayment = { method: "", receipt_number: "", amount: 0, date: "", personid: "" };
     }
     getpayall() {
-        this.http.get('http://luzvioleta.herokuapp.com/selectPay').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectPay').subscribe(data => {
             this.allpay = data;
             this.allpay2 = data;
         });
     }
     getalldef() {
-        this.http.get('http://luzvioleta.herokuapp.com/selectdefaulter').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectdefaulter').subscribe(data => {
             this.alldef = data;
             this.alldef2 = data;
         });
     }
     getPerson() {
-        this.http.get('http://luzvioleta.herokuapp.com/selectPerson').subscribe(data => {
+        this.http.get('https://luzvioleta.herokuapp.com/selectPerson').subscribe(data => {
             this.person = data;
         });
     }
@@ -540,7 +540,7 @@ class ModulePaymentComponent {
     setpayment() {
         if (this.newpayment.method != "" && this.newpayment.receipt_number != "" && this.newpayment.date != "" && this.newpayment.personid != "" && this.newpayment.amount > 0) {
             this.emptyCamp = false;
-            this.http.post('http://luzvioleta.herokuapp.com/insertpayment', this.newpayment).subscribe(data => {
+            this.http.post('https://luzvioleta.herokuapp.com/insertpayment', this.newpayment).subscribe(data => {
                 this.initpayment();
                 this.getpayall();
                 this.getalldef();
