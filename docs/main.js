@@ -114,24 +114,26 @@ class ModulePersonDetailComponent {
         this.selectEmployee = { rut: null, name: "", lastname: "", speciality: "" };
     }
     search(x) {
-        let i, word2, word1;
-        if (this.tosearch.split(" ")[1] != null) {
-            word1 = this.tosearch.split(" ")[0];
-            word2 = this.tosearch.split(" ")[1];
-        }
-        else {
-            word1 = this.tosearch;
-            word2 = "undefined";
-        }
+        let i, j, words = [];
         if (x == 1) {
-            if (this.tosearch == "") {
+            if (this.tosearch.length == "") {
                 this.items = this.items2;
             }
             else {
+                words = this.tosearch.split(" ");
                 this.items = [];
                 for (i = 0; i < this.items2.length; i++) {
-                    if (word1.toLowerCase() == this.items2[i].rut.toLowerCase() || word1.toLowerCase() == this.items2[i].name.toLowerCase() || word1.toLowerCase() == this.items2[i].lastname.toLowerCase() || word2.toLowerCase() == this.items2[i].lastname.toLowerCase()) {
+                    if (this.items2[i].rut.toLowerCase().search(this.tosearch.toLowerCase()) != -1) {
                         this.items.push(this.items2[i]);
+                    }
+                    else {
+                        for (j = 0; j < words.length; j++) {
+                            if (words[j] != "") {
+                                if (this.items2[i].name.toLowerCase().search(words[j].toLowerCase()) != -1 || this.items2[i].lastname.toLowerCase().search(words[j].toLowerCase()) != -1) {
+                                    this.items.push(this.items2[i]);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -141,10 +143,20 @@ class ModulePersonDetailComponent {
                 this.employee = this.employee2;
             }
             else {
+                words = this.tosearch.split(" ");
                 this.employee = [];
                 for (i = 0; i < this.employee2.length; i++) {
-                    if (word1.toLowerCase() == this.employee2[i].speciality.toLowerCase() || word1.toLowerCase() == this.employee2[i].rut.toLowerCase() || word1.toLowerCase() == this.employee2[i].name.toLowerCase() || word1.toLowerCase() == this.employee2[i].lastname.toLowerCase() || word2.toLowerCase() == this.employee2[i].lastname.toLowerCase()) {
+                    if (this.employee2[i].speciality.toLowerCase() == this.tosearch.toLowerCase() || this.employee2[i].rut.toLowerCase().search(this.tosearch.toLowerCase()) != -1) {
                         this.employee.push(this.employee2[i]);
+                    }
+                    else {
+                        for (j = 0; j < words.length; j++) {
+                            if (words[j] != "") {
+                                if (this.employee2[i].name.toLowerCase().search(words[j].toLowerCase()) != -1 || this.employee2[i].lastname.toLowerCase().search(words[j].toLowerCase()) != -1) {
+                                    this.employee.push(this.employee2[i]);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -189,7 +201,7 @@ class ModulePersonDetailComponent {
     }
 }
 ModulePersonDetailComponent.ɵfac = function ModulePersonDetailComponent_Factory(t) { return new (t || ModulePersonDetailComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
-ModulePersonDetailComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ModulePersonDetailComponent, selectors: [["app-module-person-detail"]], decls: 69, vars: 11, consts: [["class", "alert alert-primary", "role", "alert", 4, "ngIf"], ["id", "myTab", "role", "tablist", 1, "nav", "nav-tabs"], ["role", "presentation", 1, "nav-item"], ["id", "home-tab", "data-toggle", "tab", "href", "#home", "role", "tab", "aria-controls", "home", "aria-selected", "true", 1, "nav-link", "active"], ["id", "profile-tab", "data-toggle", "tab", "href", "#profile", "role", "tab", "aria-controls", "profile", "aria-selected", "false", 1, "nav-link"], ["id", "myTabContent", 1, "tab-content"], ["id", "home", "role", "tabpanel", "aria-labelledby", "home-tab", 1, "tab-pane", "fade", "show", "active"], [1, "navbar", "navbar-light", "bg-light"], ["type", "search", "placeholder", "Search", "aria-label", "Search", 1, "form-control", 3, "ngModel", "keyup.enter", "ngModelChange"], ["type", "button", "routerLink", "../courses", 1, "btn", "btn-outline-primary", 3, "queryParams"], ["routerLink", "../courses", "class", "card  border-primary mb-3  ", 3, "queryParams", 4, "ngFor", "ngForOf"], ["id", "profile", "role", "tabpanel", "aria-labelledby", "profile-tab", 1, "tab-pane", "fade"], ["type", "button", "data-toggle", "modal", "data-target", "#employee", 1, "btn", "btn-outline-primary", 3, "click"], ["data-toggle", "modal", "data-target", "#employee", "class", "card  border-primary mb-3  ", 3, "click", 4, "ngFor", "ngForOf"], ["id", "employee", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], [1, "modal-dialog"], [1, "modal-content"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], [1, "modal-body"], [1, "input-group", "mb-3"], [1, "input-group-prepend"], [1, "input-group-text"], ["type", "text", "name", "rut", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "text", "name", "name", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "text", "name", "lastname", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "text", "name", "speciality", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "modal-footer"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-secondary"], ["type", "button", "data-toggle", "modal", "data-target", "#confirmModal", "data-dismiss", "modal", 1, "btn", "btn-primary"], ["id", "confirmModal", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["type", "button", "data-dismiss", "modal", "aria-label", "Close", 1, "close"], ["aria-hidden", "true"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-primary", 3, "click"], ["role", "alert", 1, "alert", "alert-primary"], ["routerLink", "../courses", 1, "card", "border-primary", "mb-3", 3, "queryParams"], [1, "card-header"], [1, "float-left", "card-title"], [1, "float-right", "card-title"], [1, "card-body", "text-primary"], [1, "card-title"], ["data-toggle", "modal", "data-target", "#employee", 1, "card", "border-primary", "mb-3", 3, "click"]], template: function ModulePersonDetailComponent_Template(rf, ctx) { if (rf & 1) {
+ModulePersonDetailComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ModulePersonDetailComponent, selectors: [["app-module-person-detail"]], decls: 69, vars: 11, consts: [["class", "alert alert-primary", "role", "alert", 4, "ngIf"], ["id", "myTab", "role", "tablist", 1, "nav", "nav-tabs"], ["role", "presentation", 1, "nav-item"], ["id", "home-tab", "data-toggle", "tab", "href", "#home", "role", "tab", "aria-controls", "home", "aria-selected", "true", 1, "nav-link", "active"], ["id", "profile-tab", "data-toggle", "tab", "href", "#profile", "role", "tab", "aria-controls", "profile", "aria-selected", "false", 1, "nav-link"], ["id", "myTabContent", 1, "tab-content"], ["id", "home", "role", "tabpanel", "aria-labelledby", "home-tab", 1, "tab-pane", "fade", "show", "active"], [1, "navbar", "navbar-light", "bg-light"], ["type", "search", "placeholder", "Search", "aria-label", "Search", 1, "form-control", 3, "ngModel", "keyup", "ngModelChange"], ["type", "button", "routerLink", "../courses", 1, "btn", "btn-outline-primary", 3, "queryParams"], ["routerLink", "../courses", "class", "card  border-primary mb-3  ", 3, "queryParams", 4, "ngFor", "ngForOf"], ["id", "profile", "role", "tabpanel", "aria-labelledby", "profile-tab", 1, "tab-pane", "fade"], ["type", "button", "data-toggle", "modal", "data-target", "#employee", 1, "btn", "btn-outline-primary", 3, "click"], ["data-toggle", "modal", "data-target", "#employee", "class", "card  border-primary mb-3  ", 3, "click", 4, "ngFor", "ngForOf"], ["id", "employee", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], [1, "modal-dialog"], [1, "modal-content"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], [1, "modal-body"], [1, "input-group", "mb-3"], [1, "input-group-prepend"], [1, "input-group-text"], ["type", "text", "name", "rut", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "text", "name", "name", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "text", "name", "lastname", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "text", "name", "speciality", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "modal-footer"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-secondary"], ["type", "button", "data-toggle", "modal", "data-target", "#confirmModal", "data-dismiss", "modal", 1, "btn", "btn-primary"], ["id", "confirmModal", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["type", "button", "data-dismiss", "modal", "aria-label", "Close", 1, "close"], ["aria-hidden", "true"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-primary", 3, "click"], ["role", "alert", 1, "alert", "alert-primary"], ["routerLink", "../courses", 1, "card", "border-primary", "mb-3", 3, "queryParams"], [1, "card-header"], [1, "float-left", "card-title"], [1, "float-right", "card-title"], [1, "card-body", "text-primary"], [1, "card-title"], ["data-toggle", "modal", "data-target", "#employee", 1, "card", "border-primary", "mb-3", 3, "click"]], template: function ModulePersonDetailComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, ModulePersonDetailComponent_div_0_Template, 2, 0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "ul", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "li", 2);
@@ -207,7 +219,7 @@ ModulePersonDetailComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div", 6);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "nav", 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "input", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup.enter", function ModulePersonDetailComponent_Template_input_keyup_enter_11_listener() { return ctx.search(1); })("ngModelChange", function ModulePersonDetailComponent_Template_input_ngModelChange_11_listener($event) { return ctx.tosearch = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup", function ModulePersonDetailComponent_Template_input_keyup_11_listener() { return ctx.search(1); })("ngModelChange", function ModulePersonDetailComponent_Template_input_ngModelChange_11_listener($event) { return ctx.tosearch = $event; });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "button", 9);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](13, "Agregar Cliente");
@@ -218,7 +230,7 @@ ModulePersonDetailComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "div", 11);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "nav", 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "input", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup.enter", function ModulePersonDetailComponent_Template_input_keyup_enter_17_listener() { return ctx.search(2); })("ngModelChange", function ModulePersonDetailComponent_Template_input_ngModelChange_17_listener($event) { return ctx.tosearch = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup", function ModulePersonDetailComponent_Template_input_keyup_17_listener() { return ctx.search(2); })("ngModelChange", function ModulePersonDetailComponent_Template_input_ngModelChange_17_listener($event) { return ctx.tosearch = $event; });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "button", 12);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ModulePersonDetailComponent_Template_button_click_18_listener() { return ctx.getselectemployee(null); });
@@ -480,19 +492,19 @@ class ModulePaymentComponent {
         this.newpayment = { method: "", receipt_number: "", amount: 0, date: "", personid: "" };
     }
     getpayall() {
-        this.http.get('https://luzvioleta.herokuapp.com/selectPay').subscribe(data => {
+        this.http.get('http://luzvioleta.herokuapp.com/selectPay').subscribe(data => {
             this.allpay = data;
             this.allpay2 = data;
         });
     }
     getalldef() {
-        this.http.get('https://luzvioleta.herokuapp.com/selectdefaulter').subscribe(data => {
+        this.http.get('http://luzvioleta.herokuapp.com/selectdefaulter').subscribe(data => {
             this.alldef = data;
             this.alldef2 = data;
         });
     }
     getPerson() {
-        this.http.get('https://luzvioleta.herokuapp.com/selectPerson').subscribe(data => {
+        this.http.get('http://luzvioleta.herokuapp.com/selectPerson').subscribe(data => {
             this.person = data;
         });
     }
@@ -528,7 +540,7 @@ class ModulePaymentComponent {
     setpayment() {
         if (this.newpayment.method != "" && this.newpayment.receipt_number != "" && this.newpayment.date != "" && this.newpayment.personid != "" && this.newpayment.amount > 0) {
             this.emptyCamp = false;
-            this.http.post('https://luzvioleta.herokuapp.com/insertpayment', this.newpayment).subscribe(data => {
+            this.http.post('http://luzvioleta.herokuapp.com/insertpayment', this.newpayment).subscribe(data => {
                 this.initpayment();
                 this.getpayall();
                 this.getalldef();
@@ -550,7 +562,7 @@ class ModulePaymentComponent {
     }
 }
 ModulePaymentComponent.ɵfac = function ModulePaymentComponent_Factory(t) { return new (t || ModulePaymentComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
-ModulePaymentComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ModulePaymentComponent, selectors: [["app-module-payment"]], decls: 98, vars: 11, consts: [["class", "alert alert-primary", "role", "alert", 4, "ngIf"], ["type", "button", "data-toggle", "modal", "data-target", "#addpay", 1, "btn", "btn-outline-primary"], ["id", "addpay", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], [1, "modal-dialog"], [1, "modal-content"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], [1, "modal-body"], [1, "input-group", "mb-3"], [1, "input-group-prepend"], [1, "input-group-text"], ["name", "miselect", 1, "custom-select", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["type", "text", "name", "name", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "number", "name", "name", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "date", "name", "lastname", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "modal-footer"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-secondary"], ["type", "button", "data-toggle", "modal", "data-target", "#confirmModal", "data-dismiss", "modal", 1, "btn", "btn-primary"], ["id", "confirmModal", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["type", "button", "data-dismiss", "modal", "aria-label", "Close", 1, "close"], ["aria-hidden", "true"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-primary", 3, "click"], ["id", "myTab", "role", "tablist", 1, "nav", "nav-tabs"], ["role", "presentation", 1, "nav-item"], ["id", "home-tab", "data-toggle", "tab", "href", "#home", "role", "tab", "aria-controls", "home", "aria-selected", "true", 1, "nav-link", "active"], ["id", "profile-tab", "data-toggle", "tab", "href", "#profile", "role", "tab", "aria-controls", "profile", "aria-selected", "false", 1, "nav-link"], ["id", "myTabContent", 1, "tab-content"], ["id", "home", "role", "tabpanel", "aria-labelledby", "home-tab", 1, "tab-pane", "fade", "show", "active"], [1, "navbar", "navbar-light", "bg-light"], ["type", "search", "placeholder", "Search", "aria-label", "Search", 1, "form-control", 3, "ngModel", "keyup.enter", "ngModelChange"], [1, "table"], ["scope", "col"], [4, "ngFor", "ngForOf"], ["id", "profile", "role", "tabpanel", "aria-labelledby", "profile-tab", 1, "tab-pane", "fade"], ["role", "alert", 1, "alert", "alert-primary"], [3, "value"], ["type", "button", "routerLink", "../personModule/courses", 1, "btn", "btn-primary", 3, "queryParams"], ["width", "1em", "height", "1em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-person-lines-fill"], ["fill-rule", "evenodd", "d", "M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"], ["type", "button", 1, "btn", "btn-primary", 3, "click"], ["width", "1em", "height", "1em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-x-circle-fill"], ["fill-rule", "evenodd", "d", "M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"]], template: function ModulePaymentComponent_Template(rf, ctx) { if (rf & 1) {
+ModulePaymentComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ModulePaymentComponent, selectors: [["app-module-payment"]], decls: 98, vars: 11, consts: [["class", "alert alert-primary", "role", "alert", 4, "ngIf"], ["type", "button", "data-toggle", "modal", "data-target", "#addpay", 1, "btn", "btn-outline-primary"], ["id", "addpay", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], [1, "modal-dialog"], [1, "modal-content"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], [1, "modal-body"], [1, "input-group", "mb-3"], [1, "input-group-prepend"], [1, "input-group-text"], ["name", "miselect", 1, "custom-select", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["type", "text", "name", "name", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "number", "name", "name", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "date", "name", "lastname", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "modal-footer"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-secondary"], ["type", "button", "data-toggle", "modal", "data-target", "#confirmModal", "data-dismiss", "modal", 1, "btn", "btn-primary"], ["id", "confirmModal", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["type", "button", "data-dismiss", "modal", "aria-label", "Close", 1, "close"], ["aria-hidden", "true"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-primary", 3, "click"], ["id", "myTab", "role", "tablist", 1, "nav", "nav-tabs"], ["role", "presentation", 1, "nav-item"], ["id", "home-tab", "data-toggle", "tab", "href", "#home", "role", "tab", "aria-controls", "home", "aria-selected", "true", 1, "nav-link", "active"], ["id", "profile-tab", "data-toggle", "tab", "href", "#profile", "role", "tab", "aria-controls", "profile", "aria-selected", "false", 1, "nav-link"], ["id", "myTabContent", 1, "tab-content"], ["id", "home", "role", "tabpanel", "aria-labelledby", "home-tab", 1, "tab-pane", "fade", "show", "active"], [1, "navbar", "navbar-light", "bg-light"], ["type", "search", "placeholder", "Search", "aria-label", "Search", 1, "form-control", 3, "ngModel", "keyup", "ngModelChange"], [1, "table"], ["scope", "col"], [4, "ngFor", "ngForOf"], ["id", "profile", "role", "tabpanel", "aria-labelledby", "profile-tab", 1, "tab-pane", "fade"], ["role", "alert", 1, "alert", "alert-primary"], [3, "value"], ["type", "button", "routerLink", "../personModule/courses", 1, "btn", "btn-primary", 3, "queryParams"], ["width", "1em", "height", "1em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-person-lines-fill"], ["fill-rule", "evenodd", "d", "M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"], ["type", "button", 1, "btn", "btn-primary", 3, "click"], ["width", "1em", "height", "1em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-x-circle-fill"], ["fill-rule", "evenodd", "d", "M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"]], template: function ModulePaymentComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, ModulePaymentComponent_div_0_Template, 2, 0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " Registrar pago\n");
@@ -671,7 +683,7 @@ ModulePaymentComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](65, "div", 28);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](66, "nav", 29);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](67, "input", 30);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup.enter", function ModulePaymentComponent_Template_input_keyup_enter_67_listener() { return ctx.search(1); })("ngModelChange", function ModulePaymentComponent_Template_input_ngModelChange_67_listener($event) { return ctx.tosearch = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup", function ModulePaymentComponent_Template_input_keyup_67_listener() { return ctx.search(1); })("ngModelChange", function ModulePaymentComponent_Template_input_ngModelChange_67_listener($event) { return ctx.tosearch = $event; });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](68, "table", 31);
@@ -704,7 +716,7 @@ ModulePaymentComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](85, "div", 34);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](86, "nav", 29);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](87, "input", 30);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup.enter", function ModulePaymentComponent_Template_input_keyup_enter_87_listener() { return ctx.search(2); })("ngModelChange", function ModulePaymentComponent_Template_input_ngModelChange_87_listener($event) { return ctx.tosearch = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup", function ModulePaymentComponent_Template_input_keyup_87_listener() { return ctx.search(2); })("ngModelChange", function ModulePaymentComponent_Template_input_ngModelChange_87_listener($event) { return ctx.tosearch = $event; });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](88, "table", 31);
@@ -960,11 +972,11 @@ class TherapyComponent {
     }
 }
 TherapyComponent.ɵfac = function TherapyComponent_Factory(t) { return new (t || TherapyComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
-TherapyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TherapyComponent, selectors: [["app-therapy"]], decls: 84, vars: 11, consts: [["class", "alert alert-primary", "role", "alert", 4, "ngIf"], [1, "navbar", "navbar-light", "bg-light"], ["type", "search", "placeholder", "Search", "aria-label", "Search", 1, "form-control", 3, "ngModel", "keyup.enter", "ngModelChange"], ["type", "button", "data-toggle", "modal", "data-target", "#terapy", 1, "btn", "btn-outline-primary"], [1, "table"], ["scope", "col"], [4, "ngFor", "ngForOf"], ["id", "terapy", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], [1, "modal-dialog"], [1, "modal-content"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], [1, "modal-body"], [1, "input-group", "mb-3"], [1, "input-group-prepend"], [1, "input-group-text"], ["name", "miselect", 1, "custom-select", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["type", "text", "name", "description", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "number", "name", "cost", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "date", "name", "lastname", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "time", "name", "birth", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "modal-footer"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-secondary"], ["type", "button", "data-toggle", "modal", "data-target", "#confirmModal", "data-dismiss", "modal", 1, "btn", "btn-primary"], ["id", "confirmModal", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["type", "button", "data-dismiss", "modal", "aria-label", "Close", 1, "close"], ["aria-hidden", "true"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-primary", 3, "click"], ["role", "alert", 1, "alert", "alert-primary"], ["type", "button", "routerLink", "../personModule/courses", 1, "btn", "btn-primary", 3, "queryParams"], ["width", "1em", "height", "1em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-person-lines-fill"], ["fill-rule", "evenodd", "d", "M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"], ["type", "button", 1, "btn", "btn-primary", 3, "click"], ["width", "1em", "height", "1em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-x-circle-fill"], ["fill-rule", "evenodd", "d", "M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"], [3, "value"]], template: function TherapyComponent_Template(rf, ctx) { if (rf & 1) {
+TherapyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TherapyComponent, selectors: [["app-therapy"]], decls: 84, vars: 11, consts: [["class", "alert alert-primary", "role", "alert", 4, "ngIf"], [1, "navbar", "navbar-light", "bg-light"], ["type", "search", "placeholder", "Search", "aria-label", "Search", 1, "form-control", 3, "ngModel", "keyup", "ngModelChange"], ["type", "button", "data-toggle", "modal", "data-target", "#terapy", 1, "btn", "btn-outline-primary"], [1, "table"], ["scope", "col"], [4, "ngFor", "ngForOf"], ["id", "terapy", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], [1, "modal-dialog"], [1, "modal-content"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], [1, "modal-body"], [1, "input-group", "mb-3"], [1, "input-group-prepend"], [1, "input-group-text"], ["name", "miselect", 1, "custom-select", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["type", "text", "name", "description", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "number", "name", "cost", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "date", "name", "lastname", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "time", "name", "birth", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "modal-footer"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-secondary"], ["type", "button", "data-toggle", "modal", "data-target", "#confirmModal", "data-dismiss", "modal", 1, "btn", "btn-primary"], ["id", "confirmModal", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["type", "button", "data-dismiss", "modal", "aria-label", "Close", 1, "close"], ["aria-hidden", "true"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-primary", 3, "click"], ["role", "alert", 1, "alert", "alert-primary"], ["type", "button", "routerLink", "../personModule/courses", 1, "btn", "btn-primary", 3, "queryParams"], ["width", "1em", "height", "1em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-person-lines-fill"], ["fill-rule", "evenodd", "d", "M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"], ["type", "button", 1, "btn", "btn-primary", 3, "click"], ["width", "1em", "height", "1em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-x-circle-fill"], ["fill-rule", "evenodd", "d", "M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"], [3, "value"]], template: function TherapyComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, TherapyComponent_div_0_Template, 2, 0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "nav", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "input", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup.enter", function TherapyComponent_Template_input_keyup_enter_2_listener() { return ctx.search(); })("ngModelChange", function TherapyComponent_Template_input_ngModelChange_2_listener($event) { return ctx.tosearch = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup", function TherapyComponent_Template_input_keyup_2_listener() { return ctx.search(); })("ngModelChange", function TherapyComponent_Template_input_ngModelChange_2_listener($event) { return ctx.tosearch = $event; });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 3);
@@ -1210,7 +1222,7 @@ class CourseModuleComponent {
         else {
             this.items = [];
             for (i = 0; i < this.items2.length; i++) {
-                if (this.tosearch.toLowerCase() == this.items2[i].name.toLowerCase()) {
+                if (this.items2[i].name.toLowerCase().search(this.tosearch.toLowerCase()) != -1) {
                     this.items.push(this.items2[i]);
                 }
             }
@@ -1218,10 +1230,10 @@ class CourseModuleComponent {
     }
 }
 CourseModuleComponent.ɵfac = function CourseModuleComponent_Factory(t) { return new (t || CourseModuleComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
-CourseModuleComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CourseModuleComponent, selectors: [["app-course-module"]], decls: 5, vars: 4, consts: [[1, "navbar", "navbar-light", "bg-light"], ["type", "search", "placeholder", "Search", "aria-label", "Search", 1, "form-control", 3, "ngModel", "keyup.enter", "ngModelChange"], ["type", "button", "routerLink", "../coursedetail", 1, "btn", "btn-outline-primary", 3, "queryParams"], ["routerLink", "../coursedetail", "class", "card border-primary mb-3", 3, "queryParams", 4, "ngFor", "ngForOf"], ["routerLink", "../coursedetail", 1, "card", "border-primary", "mb-3", 3, "queryParams"], [1, "card-header"], [1, "float-left", "card-title"], [1, "card-body", "text-primary"], [1, "card-title"]], template: function CourseModuleComponent_Template(rf, ctx) { if (rf & 1) {
+CourseModuleComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CourseModuleComponent, selectors: [["app-course-module"]], decls: 5, vars: 4, consts: [[1, "navbar", "navbar-light", "bg-light"], ["type", "search", "placeholder", "Search", "aria-label", "Search", 1, "form-control", 3, "ngModel", "keyup", "ngModelChange"], ["type", "button", "routerLink", "../coursedetail", 1, "btn", "btn-outline-primary", 3, "queryParams"], ["routerLink", "../coursedetail", "class", "card border-primary mb-3", 3, "queryParams", 4, "ngFor", "ngForOf"], ["routerLink", "../coursedetail", 1, "card", "border-primary", "mb-3", 3, "queryParams"], [1, "card-header"], [1, "float-left", "card-title"], [1, "card-body", "text-primary"], [1, "card-title"]], template: function CourseModuleComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "nav", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "input", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup.enter", function CourseModuleComponent_Template_input_keyup_enter_1_listener() { return ctx.search(); })("ngModelChange", function CourseModuleComponent_Template_input_ngModelChange_1_listener($event) { return ctx.tosearch = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup", function CourseModuleComponent_Template_input_keyup_1_listener() { return ctx.search(); })("ngModelChange", function CourseModuleComponent_Template_input_ngModelChange_1_listener($event) { return ctx.tosearch = $event; });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "Agregar Formacion");
@@ -1248,6 +1260,76 @@ CourseModuleComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵde
 
 /***/ }),
 
+/***/ "QX6l":
+/*!**************************************************!*\
+  !*** ./src/app/dashboard/dashboard.component.ts ***!
+  \**************************************************/
+/*! exports provided: DashboardComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardComponent", function() { return DashboardComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _service_auth_guard_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../service/auth-guard.service */ "UeAQ");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
+
+
+
+class DashboardComponent {
+    constructor(auth, router) {
+        this.auth = auth;
+        this.router = router;
+    }
+    ngOnInit() {
+    }
+    logout() {
+        this.auth.logout();
+    }
+}
+DashboardComponent.ɵfac = function DashboardComponent_Factory(t) { return new (t || DashboardComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_service_auth_guard_service__WEBPACK_IMPORTED_MODULE_1__["AuthGuardService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
+DashboardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: DashboardComponent, selectors: [["app-dashboard"]], decls: 16, vars: 0, consts: [["role", "main", 1, "container"], [1, "navbar", "navbar-light", "bg-light"], ["src", "https://jigmam.github.io/LuzVioleta/assets/luzVioleta.png", "width", "10%", "height", "100%", "alt", "Luz Violeta", "loading", "lazy", 1, "d-inline-block", "align-top"], ["routerLink", "personModule", 1, "nav-link"], ["routerLink", "courseModule", 1, "nav-link"], ["routerLink", "therapyModule", 1, "nav-link"], ["routerLink", "paymentModule", 1, "nav-link"], ["type", "button", 1, "btn", "btn-primary", 3, "click"], ["width", "1em", "height", "1em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-house-door-fill"], ["d", "M6.5 10.995V14.5a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5V11c0-.25-.25-.5-.5-.5H7c-.25 0-.5.25-.5.495z"], ["fill-rule", "evenodd", "d", "M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"]], template: function DashboardComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "main", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "nav", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "img", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "a", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Clientes");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "a", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Formaciones");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "a", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "Terapias");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "a", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, "Pagos");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "button", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DashboardComponent_Template_button_click_11_listener() { return ctx.logout(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnamespaceSVG"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "svg", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](13, "path", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](14, "path", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnamespaceHTML"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](15, "router-outlet");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterLinkWithHref"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterOutlet"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2Rhc2hib2FyZC9kYXNoYm9hcmQuY29tcG9uZW50LmNzcyJ9 */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](DashboardComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-dashboard',
+                templateUrl: './dashboard.component.html',
+                styleUrls: ['./dashboard.component.css']
+            }]
+    }], function () { return [{ type: _service_auth_guard_service__WEBPACK_IMPORTED_MODULE_1__["AuthGuardService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }]; }, null); })();
+
+
+/***/ }),
+
 /***/ "Sy1n":
 /*!**********************************!*\
   !*** ./src/app/app.component.ts ***!
@@ -1269,26 +1351,12 @@ class AppComponent {
     }
 }
 AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(); };
-AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 12, vars: 0, consts: [["role", "main", 1, "container"], [1, "navbar", "navbar-light", "bg-light"], ["src", "https://jigmam.github.io/LuzVioleta/assets/luzVioleta.png", "width", "10%", "height", "100%", "alt", "Luz Violeta", "loading", "lazy", 1, "d-inline-block", "align-top"], ["href", "personModule", 1, "nav-link"], ["href", "courseModule", 1, "nav-link"], ["href", "therapyModule", 1, "nav-link"], ["href", "paymentModule", 1, "nav-link"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "main", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "nav", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "img", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "a", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Clientes");
+AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 3, vars: 0, consts: [[1, "footer"], ["width", "50em", "height", "90%", "src", "https://jigmam.github.io/apkres/assets/alg.png", 1, "center"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "router-outlet");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "img", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "a", 4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Formaciones");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "a", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "Terapias");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "a", 6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, "Pagos");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](11, "router-outlet");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterOutlet"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuY3NzIn0= */"] });
+    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterOutlet"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuY3NzIn0= */", ".footer[_ngcontent-%COMP%] {\n      position: fixed;\n      left: 0;\n      bottom: 0;\n      width: 100%;\n      background-color: rgb(66, 11, 94);\n      color: white;\n      text-align: center;\n    }"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](AppComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -1297,6 +1365,61 @@ AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
                 styleUrls: ['./app.component.css']
             }]
     }], null, null); })();
+
+
+/***/ }),
+
+/***/ "UeAQ":
+/*!***********************************************!*\
+  !*** ./src/app/service/auth-guard.service.ts ***!
+  \***********************************************/
+/*! exports provided: AuthGuardService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuardService", function() { return AuthGuardService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
+
+
+
+class AuthGuardService {
+    constructor(http, router) {
+        this.http = http;
+        this.router = router;
+        this.userLoggedIn = false;
+    }
+    canActivate() {
+        if (!this.userLoggedIn) {
+            this.router.navigate(['login']);
+            return false;
+        }
+        return true;
+    }
+    login(user) {
+        this.http.post('https://luzvioleta.herokuapp.com/loginuser', user).subscribe(data => {
+            if (data) {
+                this.userLoggedIn = true;
+                this.router.navigate(['dashboard']);
+            }
+        });
+    }
+    logout() {
+        this.userLoggedIn = false;
+        this.router.navigate(['login']);
+    }
+}
+AuthGuardService.ɵfac = function AuthGuardService_Factory(t) { return new (t || AuthGuardService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
+AuthGuardService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: AuthGuardService, factory: AuthGuardService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](AuthGuardService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }]; }, null); })();
 
 
 /***/ }),
@@ -1326,6 +1449,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modulecoursedetail_modulecoursedetail_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modulecoursedetail/modulecoursedetail.component */ "w5us");
 /* harmony import */ var _modulecourseview_modulecourseview_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modulecourseview/modulecourseview.component */ "xj2f");
 /* harmony import */ var _therapy_therapy_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./therapy/therapy.component */ "BmRT");
+/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./login/login.component */ "vtpD");
+/* harmony import */ var _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./dashboard/dashboard.component */ "QX6l");
+
+
 
 
 
@@ -1360,7 +1487,9 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
         _module_person_detail_module_person_detail_component__WEBPACK_IMPORTED_MODULE_9__["ModulePersonDetailComponent"],
         _modulecoursedetail_modulecoursedetail_component__WEBPACK_IMPORTED_MODULE_12__["ModulecoursedetailComponent"],
         _modulecourseview_modulecourseview_component__WEBPACK_IMPORTED_MODULE_13__["ModulecourseviewComponent"],
-        _therapy_therapy_component__WEBPACK_IMPORTED_MODULE_14__["TherapyComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+        _therapy_therapy_component__WEBPACK_IMPORTED_MODULE_14__["TherapyComponent"],
+        _login_login_component__WEBPACK_IMPORTED_MODULE_15__["LoginComponent"],
+        _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_16__["DashboardComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
         _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"],
@@ -1377,7 +1506,9 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     _module_person_detail_module_person_detail_component__WEBPACK_IMPORTED_MODULE_9__["ModulePersonDetailComponent"],
                     _modulecoursedetail_modulecoursedetail_component__WEBPACK_IMPORTED_MODULE_12__["ModulecoursedetailComponent"],
                     _modulecourseview_modulecourseview_component__WEBPACK_IMPORTED_MODULE_13__["ModulecourseviewComponent"],
-                    _therapy_therapy_component__WEBPACK_IMPORTED_MODULE_14__["TherapyComponent"]
+                    _therapy_therapy_component__WEBPACK_IMPORTED_MODULE_14__["TherapyComponent"],
+                    _login_login_component__WEBPACK_IMPORTED_MODULE_15__["LoginComponent"],
+                    _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_16__["DashboardComponent"]
                 ],
                 imports: [
                     _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -1924,7 +2055,7 @@ class ModulePersonCourseComponent {
     }
 }
 ModulePersonCourseComponent.ɵfac = function ModulePersonCourseComponent_Factory(t) { return new (t || ModulePersonCourseComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"])); };
-ModulePersonCourseComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ModulePersonCourseComponent, selectors: [["app-module-person-course"]], decls: 135, vars: 21, consts: [["class", "alert alert-primary", "role", "alert", 4, "ngIf"], ["routerLink", "../person", "width", "2em", "height", "2em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-backspace-fill"], ["fill-rule", "evenodd", "d", "M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2V3zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8 5.829 5.854z"], [1, "input-group", "mb-3"], [1, "input-group-prepend"], [1, "input-group-text"], ["type", "text", "name", "rut", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["class", "input-group mb-3", 4, "ngIf"], ["class", "input-group", 4, "ngIf"], ["type", "button", "data-toggle", "modal", "data-target", "#confirmModal", 1, "btn", "btn-primary", "float-right"], ["id", "confirmModal", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], [1, "modal-dialog"], [1, "modal-content"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], ["type", "button", "data-dismiss", "modal", "aria-label", "Close", 1, "close"], ["aria-hidden", "true"], [1, "modal-body"], [1, "modal-footer"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-secondary"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-primary", 3, "click"], ["type", "button", "class", "btn btn-outline-primary", "data-toggle", "modal", "data-target", "#course", 3, "click", 4, "ngIf"], ["id", "course", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["class", "card  border-primary mb-3", "data-toggle", "modal", "data-target", ".bd-example-modal-sm", 3, "click", 4, "ngFor", "ngForOf"], ["type", "button", "data-toggle", "modal", "data-target", "#terapia", "class", "btn btn-outline-primary", 4, "ngIf"], ["id", "terapia", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["type", "text", "name", "description", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "number", "name", "cost", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "button", "data-toggle", "modal", "data-target", "#confirmModal1", "data-dismiss", "modal", 1, "btn", "btn-primary"], ["id", "confirmModal1", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["type", "button", "data-toggle", "modal", "data-target", "#addpay", "class", "btn btn-outline-primary", 4, "ngIf"], ["id", "addpay", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["type", "text", "name", "name", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "number", "name", "name", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "date", "name", "lastname", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "button", "data-toggle", "modal", "data-target", "#confirmModal2", "data-dismiss", "modal", 1, "btn", "btn-primary"], ["id", "confirmModal2", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["class", "nav nav-tabs", "id", "myTab", "role", "tablist", 4, "ngIf"], ["class", "tab-content", "id", "myTabContent", 4, "ngIf"], ["role", "alert", 1, "alert", "alert-primary"], ["type", "text", "name", "name", "aria-describedby", "basic-addon3", "required", "", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "text", "name", "lastname", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "date", "name", "birth", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "input-group"], ["aria-label", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "button", "data-toggle", "modal", "data-target", "#course", 1, "btn", "btn-outline-primary", 3, "click"], ["data-toggle", "modal", "data-target", ".bd-example-modal-sm", 1, "card", "border-primary", "mb-3", 3, "click"], [1, "card-header"], [1, "float-left", "card-title"], [1, "float-right", "card-title"], [1, "card-body", "text-primary"], [1, "card-title"], ["type", "button", "data-toggle", "modal", "data-target", "#terapia", 1, "btn", "btn-outline-primary"], ["name", "miselect", 1, "custom-select", 3, "ngModel", "ngModelChange"], [3, "value"], [3, "value", 4, "ngFor", "ngForOf"], ["type", "date", "name", "date", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "time", "name", "hour", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "button", "data-toggle", "modal", "data-target", "#addpay", 1, "btn", "btn-outline-primary"], ["id", "myTab", "role", "tablist", 1, "nav", "nav-tabs"], ["role", "presentation", 1, "nav-item"], ["id", "home-tab", "data-toggle", "tab", "href", "#home", "role", "tab", "aria-controls", "home", "aria-selected", "true", 1, "nav-link", "active"], ["id", "profile-tab", "data-toggle", "tab", "href", "#profile", "role", "tab", "aria-controls", "profile", "aria-selected", "false", 1, "nav-link"], ["id", "myTabContent", 1, "tab-content"], ["id", "home", "role", "tabpanel", "aria-labelledby", "home-tab", 1, "tab-pane", "fade", "show", "active"], [1, "navbar", "navbar-light", "bg-light"], ["type", "search", "placeholder", "Search", "aria-label", "Search", 1, "form-control"], [1, "table"], ["scope", "col"], [4, "ngFor", "ngForOf"], ["id", "profile", "role", "tabpanel", "aria-labelledby", "profile-tab", 1, "tab-pane", "fade"], ["type", "button", "routerLink", "../../courseModule/coursedetail", 1, "btn", "btn-primary", 3, "queryParams"], ["width", "1em", "height", "1em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-person-lines-fill"], ["fill-rule", "evenodd", "d", "M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"], ["type", "button", 1, "btn", "btn-primary", 3, "click"], ["width", "1em", "height", "1em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-x-circle-fill"], ["fill-rule", "evenodd", "d", "M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"]], template: function ModulePersonCourseComponent_Template(rf, ctx) { if (rf & 1) {
+ModulePersonCourseComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ModulePersonCourseComponent, selectors: [["app-module-person-course"]], decls: 135, vars: 21, consts: [["class", "alert alert-indigo", "role", "alert", 4, "ngIf"], ["routerLink", "../person", "width", "2em", "height", "2em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-backspace-fill"], ["fill-rule", "evenodd", "d", "M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2V3zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8 5.829 5.854z"], [1, "input-group", "mb-3"], [1, "input-group-prepend"], [1, "input-group-text"], ["type", "text", "name", "rut", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["class", "input-group mb-3", 4, "ngIf"], ["class", "input-group", 4, "ngIf"], ["type", "button", "data-toggle", "modal", "data-target", "#confirmModal", 1, "btn", "btn-indigo", "float-right"], ["id", "confirmModal", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], [1, "modal-dialog"], [1, "modal-content"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], ["type", "button", "data-dismiss", "modal", "aria-label", "Close", 1, "close"], ["aria-hidden", "true"], [1, "modal-body"], [1, "modal-footer"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-secondary"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-indigo", 3, "click"], ["type", "button", "class", "btn btn-outline-indigo", "data-toggle", "modal", "data-target", "#course", 3, "click", 4, "ngIf"], ["id", "course", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["class", "card  border-indigo mb-3", "data-toggle", "modal", "data-target", ".bd-example-modal-sm", 3, "click", 4, "ngFor", "ngForOf"], ["type", "button", "data-toggle", "modal", "data-target", "#terapia", "class", "btn btn-outline-indigo", 4, "ngIf"], ["id", "terapia", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["type", "text", "name", "description", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "number", "name", "cost", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "button", "data-toggle", "modal", "data-target", "#confirmModal1", "data-dismiss", "modal", 1, "btn", "btn-indigo"], ["id", "confirmModal1", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["type", "button", "data-toggle", "modal", "data-target", "#addpay", "class", "btn btn-outline-indigo", 4, "ngIf"], ["id", "addpay", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["type", "text", "name", "name", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "number", "name", "name", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "date", "name", "lastname", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "button", "data-toggle", "modal", "data-target", "#confirmModal2", "data-dismiss", "modal", 1, "btn", "btn-indigo"], ["id", "confirmModal2", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["class", "nav nav-tabs", "id", "myTab", "role", "tablist", 4, "ngIf"], ["class", "tab-content", "id", "myTabContent", 4, "ngIf"], ["role", "alert", 1, "alert", "alert-indigo"], ["type", "text", "name", "name", "aria-describedby", "basic-addon3", "required", "", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "text", "name", "lastname", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "date", "name", "birth", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "input-group"], ["aria-label", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "button", "data-toggle", "modal", "data-target", "#course", 1, "btn", "btn-outline-indigo", 3, "click"], ["data-toggle", "modal", "data-target", ".bd-example-modal-sm", 1, "card", "border-indigo", "mb-3", 3, "click"], [1, "card-header"], [1, "float-left", "card-title"], [1, "float-right", "card-title"], [1, "card-body", "text-indigo"], [1, "card-title"], ["type", "button", "data-toggle", "modal", "data-target", "#terapia", 1, "btn", "btn-outline-indigo"], ["name", "miselect", 1, "custom-select", 3, "ngModel", "ngModelChange"], [3, "value"], [3, "value", 4, "ngFor", "ngForOf"], ["type", "date", "name", "date", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "time", "name", "hour", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "button", "data-toggle", "modal", "data-target", "#addpay", 1, "btn", "btn-outline-indigo"], ["id", "myTab", "role", "tablist", 1, "nav", "nav-tabs"], ["role", "presentation", 1, "nav-item"], ["id", "home-tab", "data-toggle", "tab", "href", "#home", "role", "tab", "aria-controls", "home", "aria-selected", "true", 1, "nav-link", "active"], ["id", "profile-tab", "data-toggle", "tab", "href", "#profile", "role", "tab", "aria-controls", "profile", "aria-selected", "false", 1, "nav-link"], ["id", "myTabContent", 1, "tab-content"], ["id", "home", "role", "tabpanel", "aria-labelledby", "home-tab", 1, "tab-pane", "fade", "show", "active"], [1, "navbar", "navbar-light", "bg-light"], ["type", "search", "placeholder", "Search", "aria-label", "Search", 1, "form-control"], [1, "table"], ["scope", "col"], [4, "ngFor", "ngForOf"], ["id", "profile", "role", "tabpanel", "aria-labelledby", "profile-tab", 1, "tab-pane", "fade"], ["type", "button", "routerLink", "../../courseModule/coursedetail", 1, "btn", "btn-indigo", 3, "queryParams"], ["width", "1em", "height", "1em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-person-lines-fill"], ["fill-rule", "evenodd", "d", "M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"], ["type", "button", 1, "btn", "btn-indigo", 3, "click"], ["width", "1em", "height", "1em", "viewBox", "0 0 16 16", "fill", "currentColor", "xmlns", "http://www.w3.org/2000/svg", 1, "bi", "bi-x-circle-fill"], ["fill-rule", "evenodd", "d", "M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"]], template: function ModulePersonCourseComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, ModulePersonCourseComponent_div_0_Template, 2, 0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnamespaceSVG"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "svg", 1);
@@ -2272,6 +2403,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modulecourseview_modulecourseview_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modulecourseview/modulecourseview.component */ "xj2f");
 /* harmony import */ var _modulecoursedetail_modulecoursedetail_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modulecoursedetail/modulecoursedetail.component */ "w5us");
 /* harmony import */ var _therapy_therapy_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./therapy/therapy.component */ "BmRT");
+/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./login/login.component */ "vtpD");
+/* harmony import */ var _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./dashboard/dashboard.component */ "QX6l");
+/* harmony import */ var _service_auth_guard_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./service/auth-guard.service */ "UeAQ");
+
+
+
 
 
 
@@ -2285,43 +2422,56 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [
-    { path: 'personModule', component: _person_module_person_module_component__WEBPACK_IMPORTED_MODULE_2__["PersonModuleComponent"],
+    { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"] },
+    { path: 'dashboard', component: _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_11__["DashboardComponent"],
         children: [
             {
-                path: 'person',
-                component: _module_person_detail_module_person_detail_component__WEBPACK_IMPORTED_MODULE_6__["ModulePersonDetailComponent"],
+                path: 'personModule', component: _person_module_person_module_component__WEBPACK_IMPORTED_MODULE_2__["PersonModuleComponent"],
+                children: [
+                    {
+                        path: 'person',
+                        component: _module_person_detail_module_person_detail_component__WEBPACK_IMPORTED_MODULE_6__["ModulePersonDetailComponent"],
+                    },
+                    {
+                        path: 'courses',
+                        component: _module_person_course_module_person_course_component__WEBPACK_IMPORTED_MODULE_5__["ModulePersonCourseComponent"],
+                    },
+                    {
+                        path: '',
+                        pathMatch: 'full',
+                        redirectTo: 'person'
+                    }
+                ]
             },
             {
-                path: 'courses',
-                component: _module_person_course_module_person_course_component__WEBPACK_IMPORTED_MODULE_5__["ModulePersonCourseComponent"],
+                path: 'courseModule', component: _modulecourseview_modulecourseview_component__WEBPACK_IMPORTED_MODULE_7__["ModulecourseviewComponent"],
+                children: [
+                    {
+                        path: 'coursedetail',
+                        component: _modulecoursedetail_modulecoursedetail_component__WEBPACK_IMPORTED_MODULE_8__["ModulecoursedetailComponent"],
+                    },
+                    {
+                        path: 'view',
+                        component: _course_module_course_module_component__WEBPACK_IMPORTED_MODULE_3__["CourseModuleComponent"],
+                    },
+                    {
+                        path: '',
+                        pathMatch: 'full',
+                        redirectTo: 'view'
+                    }
+                ]
             },
+            { path: 'therapyModule', component: _therapy_therapy_component__WEBPACK_IMPORTED_MODULE_9__["TherapyComponent"] },
+            { path: 'paymentModule', component: _module_payment_module_payment_component__WEBPACK_IMPORTED_MODULE_4__["ModulePaymentComponent"] },
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'person'
+                redirectTo: 'personModule'
             }
-        ]
+        ],
+        canActivate: [_service_auth_guard_service__WEBPACK_IMPORTED_MODULE_12__["AuthGuardService"]],
     },
-    { path: 'courseModule', component: _modulecourseview_modulecourseview_component__WEBPACK_IMPORTED_MODULE_7__["ModulecourseviewComponent"],
-        children: [
-            {
-                path: 'coursedetail',
-                component: _modulecoursedetail_modulecoursedetail_component__WEBPACK_IMPORTED_MODULE_8__["ModulecoursedetailComponent"],
-            },
-            {
-                path: 'view',
-                component: _course_module_course_module_component__WEBPACK_IMPORTED_MODULE_3__["CourseModuleComponent"],
-            },
-            {
-                path: '',
-                pathMatch: 'full',
-                redirectTo: 'view'
-            }
-        ]
-    },
-    { path: 'therapyModule', component: _therapy_therapy_component__WEBPACK_IMPORTED_MODULE_9__["TherapyComponent"] },
-    { path: 'paymentModule', component: _module_payment_module_payment_component__WEBPACK_IMPORTED_MODULE_4__["ModulePaymentComponent"] },
-    { path: '', redirectTo: 'personModule', pathMatch: 'full' }
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 class AppRoutingModule {
 }
@@ -2335,6 +2485,179 @@ AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineI
                 exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
             }]
     }], null, null); })();
+
+
+/***/ }),
+
+/***/ "vtpD":
+/*!******************************************!*\
+  !*** ./src/app/login/login.component.ts ***!
+  \******************************************/
+/*! exports provided: LoginComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _service_auth_guard_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../service/auth-guard.service */ "UeAQ");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+
+
+
+
+
+
+class LoginComponent {
+    constructor(auth, router, http) {
+        this.auth = auth;
+        this.router = router;
+        this.http = http;
+    }
+    ngOnInit() {
+        this.initUser();
+    }
+    login() {
+        this.auth.login(this.user);
+    }
+    initUser() {
+        this.user = { username: "", password: "", email: "" };
+    }
+    openModal() {
+        this.initUser();
+    }
+    saveuser() {
+        console.log(this.user);
+        this.http.post('https://luzvioleta.herokuapp.com/insertuser', this.user).subscribe(data => {
+        });
+        this.initUser();
+    }
+    closeModal() {
+        this.initUser();
+    }
+}
+LoginComponent.ɵfac = function LoginComponent_Factory(t) { return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_service_auth_guard_service__WEBPACK_IMPORTED_MODULE_1__["AuthGuardService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"])); };
+LoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: LoginComponent, selectors: [["app-login"]], decls: 51, vars: 5, consts: [[1, "container", "h-100"], [1, "d-flex", "justify-content-center", "h-100"], [1, "user_card"], [1, "d-flex", "justify-content-center"], [1, "brand_logo_container"], ["src", "https://jigmam.github.io/LuzVioleta/assets/luzVioleta.png", "width", "90%", "alt", "Logo", 1, "brand_logo"], [1, "d-flex", "justify-content-center", "form_container"], [1, "input-group", "mb-3"], [1, "input-group-append"], [1, "input-group-text"], [1, "fas", "fa-user"], ["type", "text", "name", "username", "placeholder", "username", 1, "form-control", "input_user", 3, "ngModel", "ngModelChange"], [1, "input-group", "mb-2"], [1, "fas", "fa-key"], ["type", "password", "name", "password", "placeholder", "password", 1, "form-control", "input_pass", 3, "ngModel", "ngModelChange"], [1, "d-flex", "justify-content-center", "mt-3", "login_container"], ["type", "button", "name", "button", 1, "btn", "login_btn", 3, "click"], [1, "mt-4"], [1, "d-flex", "justify-content-center", "links"], ["data-toggle", "modal", "data-target", "#exampleModal", 1, "ml-2", 3, "click"], ["id", "exampleModal", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], [1, "modal-dialog"], [1, "modal-content"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], [1, "modal-body"], [1, "input-group-prepend"], ["type", "text", "name", "username", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "text", "name", "password", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "text", "name", "email", "aria-describedby", "basic-addon3", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "modal-footer"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-secondary", 3, "click"], ["type", "button", "data-toggle", "modal", "data-target", "#exampleModal", "data-dismiss", "modal", 1, "btn", "btn-primary", 3, "click"]], template: function LoginComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "img", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "form");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "span", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](12, "i", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "input", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function LoginComponent_Template_input_ngModelChange_13_listener($event) { return ctx.user.username = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "div", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "span", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](17, "i", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "input", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function LoginComponent_Template_input_ngModelChange_18_listener($event) { return ctx.user.password = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "div", 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "button", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LoginComponent_Template_button_click_20_listener() { return ctx.login(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21, "Login");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](22, "div", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "div", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](24, " Don't have an account? ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "a", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LoginComponent_Template_a_click_25_listener() { return ctx.openModal(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](26, "Sign Up");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "div", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "div", 21);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "div", 22);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "div", 23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "h5", 24);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](32, "Crear usuario");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "div", 25);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](34, "div", 26);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](35, "span", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](36, "Username");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](37, "input", 27);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function LoginComponent_Template_input_ngModelChange_37_listener($event) { return ctx.user.username = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](38, "div", 26);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](39, "span", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](40, "Password");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](41, "input", 28);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function LoginComponent_Template_input_ngModelChange_41_listener($event) { return ctx.user.password = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](42, "div", 26);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](43, "span", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](44, "Email");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](45, "input", 29);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function LoginComponent_Template_input_ngModelChange_45_listener($event) { return ctx.user.email = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](46, "div", 30);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](47, "button", 31);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LoginComponent_Template_button_click_47_listener() { return ctx.closeModal(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](48, "cerrar");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](49, "button", 32);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LoginComponent_Template_button_click_49_listener() { return ctx.saveuser(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](50, "Guardar");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.user.username);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.user.password);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.user.username);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.user.password);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.user.email);
+    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgForm"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgModel"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["RequiredValidator"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5jc3MifQ== */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](LoginComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-login',
+                templateUrl: './login.component.html',
+                styleUrls: ['./login.component.css']
+            }]
+    }], function () { return [{ type: _service_auth_guard_service__WEBPACK_IMPORTED_MODULE_1__["AuthGuardService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }, { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }]; }, null); })();
 
 
 /***/ }),
